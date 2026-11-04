@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartLib - Issue Books Desk</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="app-sidebar">
+            <div class="sidebar-brand">
+                <i class="fa-solid fa-book-bookmark"></i>
+                <h2>SmartLib</h2>
+                <span>v1.0</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section-title">Core Navigation</div>
+                <a href="dashboard.html" class="nav-link" id="nav-dashboard">
+                    <i class="fa-solid fa-gauge-high"></i> Dashboard
+                </a>
+                <a href="books.html" class="nav-link" id="nav-books">
+                    <i class="fa-solid fa-book"></i> Book Catalog
+                </a>
+                <a href="categories.html" class="nav-link role-staff-only" id="nav-categories">
+                    <i class="fa-solid fa-tags"></i> Book Categories
+                </a>
+
+                <div class="nav-section-title role-staff-only">Circulation Desk</div>
+                <a href="issue-books.html" class="nav-link active role-staff-only" id="nav-issue-books">
+                    <i class="fa-solid fa-arrow-up-from-bracket"></i> Issue Books
+                </a>
+                <a href="return-books.html" class="nav-link role-staff-only" id="nav-return-books">
+                    <i class="fa-solid fa-arrow-down-to-bracket"></i> Return Books
+                </a>
+                <a href="overdue.html" class="nav-link" id="nav-overdue">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Due Dates & Overdue
+                </a>
+
+                <div class="nav-section-title role-student-only">Student Portal</div>
+                <a href="my-books.html" class="nav-link role-student-only" id="nav-my-books">
+                    <i class="fa-solid fa-book-reader"></i> My Borrowed Books
+                </a>
+
+                <div class="nav-section-title role-staff-only">Administration</div>
+                <a href="members.html" class="nav-link role-staff-only" id="nav-members">
+                    <i class="fa-solid fa-users"></i> Manage Members
+                </a>
+                <a href="librarians.html" class="nav-link role-admin-only" id="nav-librarians">
+                    <i class="fa-solid fa-user-shield"></i> Manage Librarians
+                </a>
+                <a href="reports.html" class="nav-link role-staff-only" id="nav-reports">
+                    <i class="fa-solid fa-chart-pie"></i> Reports & Logs
+                </a>
+
+                <div class="nav-section-title">Account & Help</div>
+                <a href="notifications.html" class="nav-link" id="nav-notifications">
+                    <i class="fa-solid fa-bell"></i> Notifications
+                </a>
+                <a href="profile.html" class="nav-link" id="nav-profile">
+                    <i class="fa-solid fa-user"></i> User Profile
+                </a>
+                <a href="settings.html" class="nav-link role-admin-only" id="nav-settings">
+                    <i class="fa-solid fa-sliders"></i> System Settings
+                </a>
+                <a href="help.html" class="nav-link" id="nav-help">
+                    <i class="fa-solid fa-circle-question"></i> Help & About
+                </a>
+            </nav>
+
+            <div class="sidebar-user">
+                <div class="user-avatar display-user-avatar">U</div>
+                <div class="user-info">
+                    <span class="display-user-name">User</span>
+                    <span class="display-user-role">ROLE</span>
+                </div>
+                <button type="button" class="btn-sidebar-logout btn-logout" title="Sign Out">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            <header class="app-topbar">
+                <div class="topbar-left">
+                    <button type="button" id="mobile-menu-toggle" class="mobile-menu-btn">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div class="page-title">
+                        <h1>Issue Book to Student</h1>
+                    </div>
+                </div>
+                <div class="topbar-right">
+                    <a href="return-books.html" class="btn-secondary btn-sm">
+                        <i class="fa-solid fa-arrow-down-to-bracket"></i> Go to Return Desk
+                    </a>
+                </div>
+            </header>
+
+            <section class="app-content">
+                <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 2rem;">
+                    <!-- Left: Issue Form Card -->
+                    <div class="content-card" style="margin-bottom: 0;">
+                        <div class="card-header-actions">
+                            <h3><i class="fa-solid fa-book-bookmark" style="color: var(--primary-color);"></i> New Loan Checkout</h3>
+                            <span class="badge badge-success">Standard 14 Days</span>
+                        </div>
+                        <div style="padding: 1.5rem;">
+                            <form id="form-direct-issue">
+                                <!-- Select Book -->
+                                <div class="input-group">
+                                    <label for="direct-book-select">
+                                        <span>Select Book to Borrow</span>
+                                        <span class="req-star">*</span>
+                                    </label>
+                                    <div class="input-field">
+                                        <i class="fa-solid fa-book field-icon"></i>
+                                        <select id="direct-book-select" required>
+                                            <option value="">-- Choose from available inventory --</option>
+                                        </select>
+                                    </div>
+                                    <small style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 4px; display: block;" id="book-stock-hint">
+                                        Only books with available copies &gt; 0 are displayed.
+                                    </small>
+                                </div>
+
+                                <!-- Select Member -->
+                                <div class="input-group">
+                                    <label for="direct-member-select">
+                                        <span>Select Registered Student / Member</span>
+                                        <span class="req-star">*</span>
+                                    </label>
+                                    <div class="input-field">
+                                        <i class="fa-solid fa-user-check field-icon"></i>
+                                        <select id="direct-member-select" required>
+                                            <option value="">-- Choose active member --</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-grid-2">
+                                    <div class="input-group">
+                                        <label for="direct-issue-date">Checkout Date</label>
+                                        <div class="input-field">
+                                            <i class="fa-solid fa-calendar-day field-icon"></i>
+                                            <input type="date" id="direct-issue-date" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="direct-due-date">
+                                            <span>Return Due Date</span>
+                                            <span class="req-star">*</span>
+                                        </label>
+                                        <div class="input-field">
+                                            <i class="fa-solid fa-calendar-check field-icon"></i>
+                                            <input type="date" id="direct-due-date" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="direct-remarks">Circulation Remarks</label>
+                                    <div class="input-field">
+                                        <i class="fa-solid fa-comment-dots field-icon"></i>
+                                        <input type="text" id="direct-remarks" placeholder="e.g. Regular semester project checkout">
+                                    </div>
+                                </div>
+
+                                <div style="margin-top: 1.5rem;">
+                                    <button type="submit" id="btn-submit-direct-issue" class="btn-primary" style="padding: 0.9rem;">
+                                        <i class="fa-solid fa-check-circle"></i> Confirm and Issue Book
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Right: Quick Guidance & Active Issue Feed -->
+                    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                        <!-- Circulation Rules Box -->
+                        <div class="content-card" style="margin-bottom: 0; background: #f8fafc;">
+                            <div class="card-header-actions" style="background: transparent;">
+                                <h3><i class="fa-solid fa-shield-halved" style="color: #0284c7;"></i> Circulation Policy</h3>
+                            </div>
+                            <div style="padding: 1.25rem; font-size: 0.88rem; color: #475569; line-height: 1.6;">
+                                <ul style="padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                                    <li><strong>Max Limit:</strong> Students can borrow up to 5 books concurrently.</li>
+                                    <li><strong>Default Loan:</strong> 14 days from checkout.</li>
+                                    <li><strong>Overdue Fine:</strong> ₹5.00 per day accrued after the due date.</li>
+                                    <li><strong>Auto Stock Tracking:</strong> Issuing reduces available copies; returns immediately restore availability.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Recent Checkouts Table -->
+                        <div class="content-card" style="margin-bottom: 0;">
+                            <div class="card-header-actions">
+                                <h3><i class="fa-solid fa-clock-rotate-left" style="color: #10b981;"></i> Today's Checkouts</h3>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="data-table" style="font-size: 0.85rem;">
+                                    <thead>
+                                        <tr>
+                                            <th>Book Title</th>
+                                            <th>Student</th>
+                                            <th>Due Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="recent-issues-table-body">
+                                        <tr><td colspan="3" class="empty-state">Loading active checkouts...</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- API Client & Controller -->
+    <script src="js/api.js"></script>
+    <script src="js/issue-books.js"></script>
+</body>
+</html>
+

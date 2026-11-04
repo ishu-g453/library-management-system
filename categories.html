@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartLib - Book Categories</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="app-sidebar">
+            <div class="sidebar-brand">
+                <i class="fa-solid fa-book-bookmark"></i>
+                <h2>SmartLib</h2>
+                <span>v1.0</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section-title">Core Navigation</div>
+                <a href="dashboard.html" class="nav-link" id="nav-dashboard">
+                    <i class="fa-solid fa-gauge-high"></i> Dashboard
+                </a>
+                <a href="books.html" class="nav-link" id="nav-books">
+                    <i class="fa-solid fa-book"></i> Book Catalog
+                </a>
+                <a href="categories.html" class="nav-link active role-staff-only" id="nav-categories">
+                    <i class="fa-solid fa-tags"></i> Book Categories
+                </a>
+
+                <div class="nav-section-title role-staff-only">Circulation Desk</div>
+                <a href="issue-books.html" class="nav-link role-staff-only" id="nav-issue-books">
+                    <i class="fa-solid fa-arrow-up-from-bracket"></i> Issue Books
+                </a>
+                <a href="return-books.html" class="nav-link role-staff-only" id="nav-return-books">
+                    <i class="fa-solid fa-arrow-down-to-bracket"></i> Return Books
+                </a>
+                <a href="overdue.html" class="nav-link" id="nav-overdue">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Due Dates & Overdue
+                </a>
+
+                <div class="nav-section-title role-student-only">Student Portal</div>
+                <a href="my-books.html" class="nav-link role-student-only" id="nav-my-books">
+                    <i class="fa-solid fa-book-reader"></i> My Borrowed Books
+                </a>
+
+                <div class="nav-section-title role-staff-only">Administration</div>
+                <a href="members.html" class="nav-link role-staff-only" id="nav-members">
+                    <i class="fa-solid fa-users"></i> Manage Members
+                </a>
+                <a href="librarians.html" class="nav-link role-admin-only" id="nav-librarians">
+                    <i class="fa-solid fa-user-shield"></i> Manage Librarians
+                </a>
+                <a href="reports.html" class="nav-link role-staff-only" id="nav-reports">
+                    <i class="fa-solid fa-chart-pie"></i> Reports & Logs
+                </a>
+
+                <div class="nav-section-title">Account & Help</div>
+                <a href="notifications.html" class="nav-link" id="nav-notifications">
+                    <i class="fa-solid fa-bell"></i> Notifications
+                </a>
+                <a href="profile.html" class="nav-link" id="nav-profile">
+                    <i class="fa-solid fa-user"></i> User Profile
+                </a>
+                <a href="settings.html" class="nav-link role-admin-only" id="nav-settings">
+                    <i class="fa-solid fa-sliders"></i> System Settings
+                </a>
+                <a href="help.html" class="nav-link" id="nav-help">
+                    <i class="fa-solid fa-circle-question"></i> Help & About
+                </a>
+            </nav>
+
+            <div class="sidebar-user">
+                <div class="user-avatar display-user-avatar">U</div>
+                <div class="user-info">
+                    <span class="display-user-name">User</span>
+                    <span class="display-user-role">ROLE</span>
+                </div>
+                <button type="button" class="btn-sidebar-logout btn-logout" title="Sign Out">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            <header class="app-topbar">
+                <div class="topbar-left">
+                    <button type="button" id="mobile-menu-toggle" class="mobile-menu-btn">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div class="page-title">
+                        <h1>Book Classification & Categories</h1>
+                    </div>
+                </div>
+                <div class="topbar-right">
+                    <button type="button" id="btn-open-add-category" class="btn-primary btn-sm" style="width: auto;">
+                        <i class="fa-solid fa-folder-plus"></i> Add New Category
+                    </button>
+                </div>
+            </header>
+
+            <section class="app-content">
+                <div class="content-card">
+                    <div class="card-header-actions">
+                        <h3><i class="fa-solid fa-layer-group" style="color: var(--primary-color);"></i> Catalog Categories</h3>
+                        <span class="badge badge-info" id="categories-count-badge">0 Categories</span>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Category Name</th>
+                                    <th>Scope & Description</th>
+                                    <th>Books Count</th>
+                                    <th>Total Inventory Copies</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="categories-table-body">
+                                <tr><td colspan="5" class="empty-state"><i class="fa-solid fa-spinner fa-spin"></i> Loading categories...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal: Add Category -->
+    <div id="modal-add-category" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-folder-plus" style="color: var(--primary-color);"></i> Add Category</h3>
+                <button type="button" class="modal-close" data-close="modal-add-category">&times;</button>
+            </div>
+            <form id="form-add-category">
+                <div class="modal-body">
+                    <div class="input-group">
+                        <label for="add-cat-name">Category Title *</label>
+                        <div class="input-field">
+                            <i class="fa-solid fa-tag field-icon"></i>
+                            <input type="text" id="add-cat-name" placeholder="e.g. Cyber Security" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="add-cat-desc">Description</label>
+                        <div class="input-field">
+                            <i class="fa-solid fa-align-left field-icon"></i>
+                            <input type="text" id="add-cat-desc" placeholder="e.g. Network defense, cryptography and threat models">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" data-close="modal-add-category">Cancel</button>
+                    <button type="submit" class="btn-primary" style="width: auto;">Save Category</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Edit Category -->
+    <div id="modal-edit-category" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-pencil" style="color: var(--primary-color);"></i> Edit Category</h3>
+                <button type="button" class="modal-close" data-close="modal-edit-category">&times;</button>
+            </div>
+            <form id="form-edit-category">
+                <input type="hidden" id="edit-cat-id">
+                <div class="modal-body">
+                    <div class="input-group">
+                        <label for="edit-cat-name">Category Title *</label>
+                        <div class="input-field">
+                            <i class="fa-solid fa-tag field-icon"></i>
+                            <input type="text" id="edit-cat-name" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="edit-cat-desc">Description</label>
+                        <div class="input-field">
+                            <i class="fa-solid fa-align-left field-icon"></i>
+                            <input type="text" id="edit-cat-desc">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" data-close="modal-edit-category">Cancel</button>
+                    <button type="submit" class="btn-primary" style="width: auto;">Update Category</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- API Client & Controller -->
+    <script src="js/api.js"></script>
+    <script src="js/categories.js"></script>
+</body>
+</html>
+

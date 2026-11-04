@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartLib - Book Catalog & Management</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="app-sidebar">
+            <div class="sidebar-brand">
+                <i class="fa-solid fa-book-bookmark"></i>
+                <h2>SmartLib</h2>
+                <span>v1.0</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section-title">Core Navigation</div>
+                <a href="dashboard.html" class="nav-link" id="nav-dashboard">
+                    <i class="fa-solid fa-gauge-high"></i> Dashboard
+                </a>
+                <a href="books.html" class="nav-link active" id="nav-books">
+                    <i class="fa-solid fa-book"></i> Book Catalog
+                </a>
+                <a href="categories.html" class="nav-link role-staff-only" id="nav-categories">
+                    <i class="fa-solid fa-tags"></i> Book Categories
+                </a>
+
+                <div class="nav-section-title role-staff-only">Circulation Desk</div>
+                <a href="issue-books.html" class="nav-link role-staff-only" id="nav-issue-books">
+                    <i class="fa-solid fa-arrow-up-from-bracket"></i> Issue Books
+                </a>
+                <a href="return-books.html" class="nav-link role-staff-only" id="nav-return-books">
+                    <i class="fa-solid fa-arrow-down-to-bracket"></i> Return Books
+                </a>
+                <a href="overdue.html" class="nav-link" id="nav-overdue">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Due Dates & Overdue
+                </a>
+
+                <div class="nav-section-title role-student-only">Student Portal</div>
+                <a href="my-books.html" class="nav-link role-student-only" id="nav-my-books">
+                    <i class="fa-solid fa-book-reader"></i> My Borrowed Books
+                </a>
+
+                <div class="nav-section-title role-staff-only">Administration</div>
+                <a href="members.html" class="nav-link role-staff-only" id="nav-members">
+                    <i class="fa-solid fa-users"></i> Manage Members
+                </a>
+                <a href="librarians.html" class="nav-link role-admin-only" id="nav-librarians">
+                    <i class="fa-solid fa-user-shield"></i> Manage Librarians
+                </a>
+                <a href="reports.html" class="nav-link role-staff-only" id="nav-reports">
+                    <i class="fa-solid fa-chart-pie"></i> Reports & Logs
+                </a>
+
+                <div class="nav-section-title">Account & Help</div>
+                <a href="notifications.html" class="nav-link" id="nav-notifications">
+                    <i class="fa-solid fa-bell"></i> Notifications
+                </a>
+                <a href="profile.html" class="nav-link" id="nav-profile">
+                    <i class="fa-solid fa-user"></i> User Profile
+                </a>
+                <a href="settings.html" class="nav-link role-admin-only" id="nav-settings">
+                    <i class="fa-solid fa-sliders"></i> System Settings
+                </a>
+                <a href="help.html" class="nav-link" id="nav-help">
+                    <i class="fa-solid fa-circle-question"></i> Help & About
+                </a>
+            </nav>
+
+            <div class="sidebar-user">
+                <div class="user-avatar display-user-avatar">U</div>
+                <div class="user-info">
+                    <span class="display-user-name">User</span>
+                    <span class="display-user-role">ROLE</span>
+                </div>
+                <button type="button" class="btn-sidebar-logout btn-logout" title="Sign Out">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            <header class="app-topbar">
+                <div class="topbar-left">
+                    <button type="button" id="mobile-menu-toggle" class="mobile-menu-btn">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div class="page-title">
+                        <h1>Books Catalog & Inventory</h1>
+                    </div>
+                </div>
+                <div class="topbar-right">
+                    <button type="button" id="btn-open-add-book" class="btn-primary btn-sm role-admin-librarian" style="width: auto;">
+                        <i class="fa-solid fa-plus"></i> Add New Book
+                    </button>
+                </div>
+            </header>
+
+            <section class="app-content">
+                <!-- Search & Filter Card -->
+                <div class="content-card">
+                    <div class="card-header-actions">
+                        <div class="table-toolbar" style="width: 100%; justify-content: space-between;">
+                            <!-- Search -->
+                            <div class="search-box">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <input type="text" id="search-books" placeholder="Search by title, author, or ISBN...">
+                            </div>
+
+                            <!-- Filter Group -->
+                            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                                <select id="filter-category" class="filter-select">
+                                    <option value="All">All Categories</option>
+                                </select>
+
+                                <select id="filter-availability" class="filter-select">
+                                    <option value="all">All Copies</option>
+                                    <option value="available">Available Only</option>
+                                    <option value="unavailable">Out of Stock</option>
+                                </select>
+
+                                <button type="button" id="btn-reset-filters" class="btn-secondary btn-sm" title="Reset Filters">
+                                    <i class="fa-solid fa-rotate-left"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Books Table -->
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ISBN</th>
+                                    <th>Title & Author</th>
+                                    <th>Category</th>
+                                    <th>Shelf</th>
+                                    <th>Total / Avail</th>
+                                    <th>Status</th>
+                                    <th class="role-admin-librarian">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="books-table-body">
+                                <tr><td colspan="7" class="empty-state"><i class="fa-solid fa-spinner fa-spin"></i> Loading books catalog...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal: Add New Book -->
+    <div id="modal-add-book" class="modal-overlay hidden">
+        <div class="modal-card modal-lg">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-book-medical" style="color: var(--primary-color);"></i> Add New Book to Library</h3>
+                <button type="button" class="modal-close" data-close="modal-add-book">&times;</button>
+            </div>
+            <form id="form-add-book">
+                <div class="modal-body">
+                    <div class="form-grid-2">
+                        <div class="input-group">
+                            <label for="add-isbn">ISBN Number *</label>
+                            <div class="input-field">
+                                <i class="fa-solid fa-barcode field-icon"></i>
+                                <input type="text" id="add-isbn" placeholder="e.g. 978-0132350884" required>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="add-category">Category *</label>
+                            <div class="input-field">
+                                <i class="fa-solid fa-folder field-icon"></i>
+                                <input type="text" id="add-category" placeholder="e.g. Computer Science, Physics" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="add-title">Book Title *</label>
+                        <div class="input-field">
+                            <i class="fa-solid fa-heading field-icon"></i>
+                            <input type="text" id="add-title" placeholder="e.g. Clean Code: Agile Software Craftsmanship" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="add-author">Author(s) *</label>
+                        <div class="input-field">
+                            <i class="fa-solid fa-user-pen field-icon"></i>
+                            <input type="text" id="add-author" placeholder="e.g. Robert C. Martin" required>
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div class="input-group">
+                            <label for="add-publisher">Publisher</label>
+                            <div class="input-field">
+                                <i class="fa-solid fa-building field-icon"></i>
+                                <input type="text" id="add-publisher" placeholder="e.g. Prentice Hall">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="add-year">Publication Year</label>
+                            <div class="input-field">
+                                <i class="fa-solid fa-calendar field-icon"></i>
+                                <input type="number" id="add-year" placeholder="e.g. 2020" min="1800" max="2099">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div class="input-group">
+                            <label for="add-copies">Total Number of Copies *</label>
+                            <div class="input-field">
+                                <i class="fa-solid fa-layer-group field-icon"></i>
+                                <input type="number" id="add-copies" value="5" min="1" max="500" required>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="add-shelf">Shelf Location</label>
+                            <div class="input-field">
+                                <i class="fa-solid fa-location-dot field-icon"></i>
+                                <input type="text" id="add-shelf" placeholder="e.g. Shelf CS-03">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" data-close="modal-add-book">Cancel</button>
+                    <button type="submit" class="btn-primary" style="width: auto;">Save Book to Catalog</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Edit Book -->
+    <div id="modal-edit-book" class="modal-overlay hidden">
+        <div class="modal-card modal-lg">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-pen-to-square" style="color: var(--primary-color);"></i> Edit Book Details</h3>
+                <button type="button" class="modal-close" data-close="modal-edit-book">&times;</button>
+            </div>
+            <form id="form-edit-book">
+                <input type="hidden" id="edit-book-id">
+                <div class="modal-body">
+                    <div class="form-grid-2">
+                        <div class="input-group">
+                            <label for="edit-isbn">ISBN Number *</label>
+                            <div class="input-field">
+                                <i class="fa-solid fa-barcode field-icon"></i>
+                                <input type="text" id="edit-isbn" required>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="edit-category">Category *</label>
+                            <div class="input-field">
+                                <i class="fa-solid fa-folder field-icon"></i>
+                                <input type="text" id="edit-category" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="edit-title">Book Title *</label>
+                        <div class="input-field">
+                            <i class="fa-solid fa-heading field-icon"></i>
+                            <input type="text" id="edit-title" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="edit-author">Author(s) *</label>
+                        <div class="input-field">
+                            <i class="fa-solid fa-user-pen field-icon"></i>
+                            <input type="text" id="edit-author" required>
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div class="input-group">
+                            <label for="edit-publisher">Publisher</label>
+                            <div class="input-field">
+                                <i class="fa-solid fa-building field-icon"></i>
+                                <input type="text" id="edit-publisher">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="edit-year">Publication Year</label>
+                            <div class="input-field">
+                                <i class="fa-solid fa-calendar field-icon"></i>
+                                <input type="number" id="edit-year" min="1800" max="2099">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div class="input-group">
+                            <label for="edit-copies">Total Copies *</label>
+                            <div class="input-field">
+                                <i class="fa-solid fa-layer-group field-icon"></i>
+                                <input type="number" id="edit-copies" min="1" required>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="edit-shelf">Shelf Location</label>
+                            <div class="input-field">
+                                <i class="fa-solid fa-location-dot field-icon"></i>
+                                <input type="text" id="edit-shelf">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" data-close="modal-edit-book">Cancel</button>
+                    <button type="submit" class="btn-primary" style="width: auto;">Update Book</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- API Client & Controller -->
+    <script src="js/api.js"></script>
+    <script src="js/books.js"></script>
+</body>
+</html>
+

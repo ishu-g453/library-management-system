@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartLib - Member Directory</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="app-sidebar">
+            <div class="sidebar-brand">
+                <i class="fa-solid fa-book-bookmark"></i>
+                <h2>SmartLib</h2>
+                <span>v1.0</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section-title">Core Navigation</div>
+                <a href="dashboard.html" class="nav-link" id="nav-dashboard">
+                    <i class="fa-solid fa-gauge-high"></i> Dashboard
+                </a>
+                <a href="books.html" class="nav-link" id="nav-books">
+                    <i class="fa-solid fa-book"></i> Book Catalog
+                </a>
+                <a href="categories.html" class="nav-link role-staff-only" id="nav-categories">
+                    <i class="fa-solid fa-tags"></i> Book Categories
+                </a>
+
+                <div class="nav-section-title role-staff-only">Circulation Desk</div>
+                <a href="issue-books.html" class="nav-link role-staff-only" id="nav-issue-books">
+                    <i class="fa-solid fa-arrow-up-from-bracket"></i> Issue Books
+                </a>
+                <a href="return-books.html" class="nav-link role-staff-only" id="nav-return-books">
+                    <i class="fa-solid fa-arrow-down-to-bracket"></i> Return Books
+                </a>
+                <a href="overdue.html" class="nav-link" id="nav-overdue">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Due Dates & Overdue
+                </a>
+
+                <div class="nav-section-title role-student-only">Student Portal</div>
+                <a href="my-books.html" class="nav-link role-student-only" id="nav-my-books">
+                    <i class="fa-solid fa-book-reader"></i> My Borrowed Books
+                </a>
+
+                <div class="nav-section-title role-staff-only">Administration</div>
+                <a href="members.html" class="nav-link active role-staff-only" id="nav-members">
+                    <i class="fa-solid fa-users"></i> Manage Members
+                </a>
+                <a href="librarians.html" class="nav-link role-admin-only" id="nav-librarians">
+                    <i class="fa-solid fa-user-shield"></i> Manage Librarians
+                </a>
+                <a href="reports.html" class="nav-link role-staff-only" id="nav-reports">
+                    <i class="fa-solid fa-chart-pie"></i> Reports & Logs
+                </a>
+
+                <div class="nav-section-title">Account & Help</div>
+                <a href="notifications.html" class="nav-link" id="nav-notifications">
+                    <i class="fa-solid fa-bell"></i> Notifications
+                </a>
+                <a href="profile.html" class="nav-link" id="nav-profile">
+                    <i class="fa-solid fa-user"></i> User Profile
+                </a>
+                <a href="settings.html" class="nav-link role-admin-only" id="nav-settings">
+                    <i class="fa-solid fa-sliders"></i> System Settings
+                </a>
+                <a href="help.html" class="nav-link" id="nav-help">
+                    <i class="fa-solid fa-circle-question"></i> Help & About
+                </a>
+            </nav>
+
+            <div class="sidebar-user">
+                <div class="user-avatar display-user-avatar">U</div>
+                <div class="user-info">
+                    <span class="display-user-name">User</span>
+                    <span class="display-user-role">ROLE</span>
+                </div>
+                <button type="button" class="btn-sidebar-logout btn-logout" title="Sign Out">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            <header class="app-topbar">
+                <div class="topbar-left">
+                    <button type="button" id="mobile-menu-toggle" class="mobile-menu-btn">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div class="page-title">
+                        <h1>Library Members & Students</h1>
+                    </div>
+                </div>
+                <div class="topbar-right">
+                    <button type="button" id="btn-open-add-member" class="btn-primary btn-sm" style="width: auto;">
+                        <i class="fa-solid fa-user-plus"></i> Register Member
+                    </button>
+                </div>
+            </header>
+
+            <section class="app-content">
+                <div class="content-card">
+                    <div class="card-header-actions">
+                        <div class="table-toolbar" style="width: 100%; justify-content: space-between;">
+                            <div class="search-box">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <input type="text" id="search-members" placeholder="Search by name, code, or email...">
+                            </div>
+
+                            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                                <select id="filter-member-role" class="filter-select">
+                                    <option value="all">All Roles</option>
+                                    <option value="student">Students</option>
+                                    <option value="faculty">Faculty</option>
+                                    <option value="staff">Staff</option>
+                                </select>
+
+                                <select id="filter-member-status" class="filter-select">
+                                    <option value="all">All Statuses</option>
+                                    <option value="active">Active Members</option>
+                                    <option value="suspended">Suspended</option>
+                                    <option value="inactive">Inactive</option>
+                                </select>
+
+                                <button type="button" id="btn-reset-member-filters" class="btn-secondary btn-sm" title="Reset Filters">
+                                    <i class="fa-solid fa-rotate-left"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Members Table -->
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Member Code</th>
+                                    <th>Member Name</th>
+                                    <th>Contact Info</th>
+                                    <th>Department</th>
+                                    <th>Role</th>
+                                    <th>Active Loans</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="members-table-body">
+                                <tr><td colspan="8" class="empty-state"><i class="fa-solid fa-spinner fa-spin"></i> Loading members directory...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal: Register Member -->
+    <div id="modal-add-member" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-user-plus" style="color: var(--primary-color);"></i> Register Library Member</h3>
+                <button type="button" class="modal-close" data-close="modal-add-member">&times;</button>
+            </div>
+            <form id="form-add-member">
+                <div class="modal-body">
+                    <div class="form-grid-2">
+                        <div class="input-group">
+                            <label for="add-member-code">Member Code (Leave blank for auto)</label>
+                            <div class="input-field">
+                                <i class="fa-solid fa-id-card field-icon"></i>
+                                <input type="text" id="add-member-code" placeholder="e.g. MEM-1006">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="add-member-role">Membership Role *</label>
+                            <div class="input-field">
+                                <i class="fa-solid fa-graduation-cap field-icon"></i>
+                                <select id="add-member-role" required>
+                                    <option value="student">Student</option>
+                                    <option value="faculty">Faculty</option>
+                                    <option value="staff">Staff</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="add-member-name">Full Name *</label>
+                        <div class="input-field">
+                            <i class="fa-solid fa-user field-icon"></i>
+                            <input type="text" id="add-member-name" placeholder="e.g. Aditi Sharma" required>
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div class="input-group">
+                            <label for="add-member-email">Email Address *</label>
+                            <div class="input-field">
+                                <i class="fa-solid fa-envelope field-icon"></i>
+                                <input type="email" id="add-member-email" placeholder="e.g. aditi@college.edu" required>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="add-member-phone">Phone Number</label>
+                            <div class="input-field">
+                                <i class="fa-solid fa-phone field-icon"></i>
+                                <input type="tel" id="add-member-phone" placeholder="e.g. +91 98765 00000">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div class="input-group">
+                            <label for="add-member-dept">Department / Major</label>
+                            <div class="input-field">
+                                <i class="fa-solid fa-building-columns field-icon"></i>
+                                <input type="text" id="add-member-dept" placeholder="e.g. Computer Science">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="add-member-status">Membership Status *</label>
+                            <div class="input-field">
+                                <i class="fa-solid fa-toggle-on field-icon"></i>
+                                <select id="add-member-status" required>
+                                    <option value="active">Active</option>
+                                    <option value="suspended">Suspended</option>
+                                    <option value="inactive">Inactive</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" data-close="modal-add-member">Cancel</button>
+                    <button type="submit" class="btn-primary" style="width: auto;">Register Member</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Edit Member -->
+    <div id="modal-edit-member" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-user-pen" style="color: var(--primary-color);"></i> Edit Member</h3>
+                <button type="button" class="modal-close" data-close="modal-edit-member">&times;</button>
+            </div>
+            <form id="form-edit-member">
+                <input type="hidden" id="edit-member-id">
+                <div class="modal-body">
+                    <div class="form-grid-2">
+                        <div class="input-group">
+                            <label for="edit-member-code">Member Code *</label>
+                            <div class="input-field">
+                                <i class="fa-solid fa-id-card field-icon"></i>
+                                <input type="text" id="edit-member-code" required>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="edit-member-role">Membership Role *</label>
+                            <div class="input-field">
+                                <i class="fa-solid fa-graduation-cap field-icon"></i>
+                                <select id="edit-member-role" required>
+                                    <option value="student">Student</option>
+                                    <option value="faculty">Faculty</option>
+                                    <option value="staff">Staff</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="edit-member-name">Full Name *</label>
+                        <div class="input-field">
+                            <i class="fa-solid fa-user field-icon"></i>
+                            <input type="text" id="edit-member-name" required>
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div class="input-group">
+                            <label for="edit-member-email">Email Address *</label>
+                            <div class="input-field">
+                                <i class="fa-solid fa-envelope field-icon"></i>
+                                <input type="email" id="edit-member-email" required>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="edit-member-phone">Phone Number</label>
+                            <div class="input-field">
+                                <i class="fa-solid fa-phone field-icon"></i>
+                                <input type="tel" id="edit-member-phone">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div class="input-group">
+                            <label for="edit-member-dept">Department</label>
+                            <div class="input-field">
+                                <i class="fa-solid fa-building-columns field-icon"></i>
+                                <input type="text" id="edit-member-dept">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="edit-member-status">Membership Status *</label>
+                            <div class="input-field">
+                                <i class="fa-solid fa-toggle-on field-icon"></i>
+                                <select id="edit-member-status" required>
+                                    <option value="active">Active</option>
+                                    <option value="suspended">Suspended</option>
+                                    <option value="inactive">Inactive</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" data-close="modal-edit-member">Cancel</button>
+                    <button type="submit" class="btn-primary" style="width: auto;">Update Member</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: View History -->
+    <div id="modal-member-history" class="modal-overlay hidden">
+        <div class="modal-card modal-lg">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-clock-rotate-left" style="color: var(--primary-color);"></i> Member Borrowing History</h3>
+                <button type="button" class="modal-close" data-close="modal-member-history">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="member-profile-summary" style="margin-bottom: 1.25rem; padding: 1rem; background: #f8fafc; border-radius: 8px;">
+                    <!-- Injected via JS -->
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Book Title</th>
+                                <th>Issue Date</th>
+                                <th>Due Date</th>
+                                <th>Return Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="member-history-table-body">
+                            <!-- Injected via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" data-close="modal-member-history">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Client & Controller -->
+    <script src="js/api.js"></script>
+    <script src="js/members.js"></script>
+</body>
+</html>
+

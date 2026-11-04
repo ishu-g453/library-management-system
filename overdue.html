@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartLib - Due Dates & Overdue Books</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="app-sidebar">
+            <div class="sidebar-brand">
+                <i class="fa-solid fa-book-bookmark"></i>
+                <h2>SmartLib</h2>
+                <span>v1.0</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section-title">Core Navigation</div>
+                <a href="dashboard.html" class="nav-link" id="nav-dashboard">
+                    <i class="fa-solid fa-gauge-high"></i> Dashboard
+                </a>
+                <a href="books.html" class="nav-link" id="nav-books">
+                    <i class="fa-solid fa-book"></i> Book Catalog
+                </a>
+                <a href="categories.html" class="nav-link role-staff-only" id="nav-categories">
+                    <i class="fa-solid fa-tags"></i> Book Categories
+                </a>
+
+                <div class="nav-section-title role-staff-only">Circulation Desk</div>
+                <a href="issue-books.html" class="nav-link role-staff-only" id="nav-issue-books">
+                    <i class="fa-solid fa-arrow-up-from-bracket"></i> Issue Books
+                </a>
+                <a href="return-books.html" class="nav-link role-staff-only" id="nav-return-books">
+                    <i class="fa-solid fa-arrow-down-to-bracket"></i> Return Books
+                </a>
+                <a href="overdue.html" class="nav-link active" id="nav-overdue">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Due Dates & Overdue
+                </a>
+
+                <div class="nav-section-title role-student-only">Student Portal</div>
+                <a href="my-books.html" class="nav-link role-student-only" id="nav-my-books">
+                    <i class="fa-solid fa-book-reader"></i> My Borrowed Books
+                </a>
+
+                <div class="nav-section-title role-staff-only">Administration</div>
+                <a href="members.html" class="nav-link role-staff-only" id="nav-members">
+                    <i class="fa-solid fa-users"></i> Manage Members
+                </a>
+                <a href="librarians.html" class="nav-link role-admin-only" id="nav-librarians">
+                    <i class="fa-solid fa-user-shield"></i> Manage Librarians
+                </a>
+                <a href="reports.html" class="nav-link role-staff-only" id="nav-reports">
+                    <i class="fa-solid fa-chart-pie"></i> Reports & Logs
+                </a>
+
+                <div class="nav-section-title">Account & Help</div>
+                <a href="notifications.html" class="nav-link" id="nav-notifications">
+                    <i class="fa-solid fa-bell"></i> Notifications
+                </a>
+                <a href="profile.html" class="nav-link" id="nav-profile">
+                    <i class="fa-solid fa-user"></i> User Profile
+                </a>
+                <a href="settings.html" class="nav-link role-admin-only" id="nav-settings">
+                    <i class="fa-solid fa-sliders"></i> System Settings
+                </a>
+                <a href="help.html" class="nav-link" id="nav-help">
+                    <i class="fa-solid fa-circle-question"></i> Help & About
+                </a>
+            </nav>
+
+            <div class="sidebar-user">
+                <div class="user-avatar display-user-avatar">U</div>
+                <div class="user-info">
+                    <span class="display-user-name">User</span>
+                    <span class="display-user-role">ROLE</span>
+                </div>
+                <button type="button" class="btn-sidebar-logout btn-logout" title="Sign Out">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            <header class="app-topbar">
+                <div class="topbar-left">
+                    <button type="button" id="mobile-menu-toggle" class="mobile-menu-btn">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div class="page-title">
+                        <h1>Due Dates & Overdue Tracking</h1>
+                    </div>
+                </div>
+                <div class="topbar-right">
+                    <button type="button" id="btn-refresh-overdue" class="btn-secondary btn-sm">
+                        <i class="fa-solid fa-rotate"></i> Refresh Audit
+                    </button>
+                </div>
+            </header>
+
+            <section class="app-content">
+                <!-- Overdue Fine Alert Notice -->
+                <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+                    <div style="display: flex; align-items: center; gap: 0.75rem; color: #92400e; font-size: 0.9rem;">
+                        <i class="fa-solid fa-bell" style="font-size: 1.3rem; color: #d97706;"></i>
+                        <span>
+                            <strong>Automated Fine Computation:</strong> Overdue fines accrue automatically at <strong>₹5.00/day</strong> starting the day after loan expiry.
+                        </span>
+                    </div>
+                    <span class="badge badge-danger" id="overdue-total-fines-badge">Accrued Fines: ₹0.00</span>
+                </div>
+
+                <!-- Overdue Books Card -->
+                <div class="content-card">
+                    <div class="card-header-actions">
+                        <h3><i class="fa-solid fa-triangle-exclamation" style="color: var(--danger-color);"></i> Overdue Books Requiring Immediate Action</h3>
+                        <span class="badge badge-danger" id="overdue-items-badge">0 Overdue</span>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Book Title</th>
+                                    <th>Borrower / Student</th>
+                                    <th>Contact Phone</th>
+                                    <th>Due Date</th>
+                                    <th>Days Late</th>
+                                    <th>Accrued Fine</th>
+                                    <th class="role-staff-only">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="overdue-table-body">
+                                <tr><td colspan="7" class="empty-state"><i class="fa-solid fa-spinner fa-spin"></i> Checking overdue records...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- API Client & Controller -->
+    <script src="js/api.js"></script>
+    <script src="js/overdue.js"></script>
+</body>
+</html>
+

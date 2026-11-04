@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartLib - Library Management System | Sign In</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-body">
+    <div class="login-wrapper">
+        <!-- Left Hero / Brand Showcase Panel -->
+        <div class="brand-side">
+            <!-- Decorative Background Light Orbs -->
+            <div class="glow-orb orb-1"></div>
+            <div class="glow-orb orb-2"></div>
+            <div class="glow-orb orb-3"></div>
+
+            <div class="brand-top">
+                <div class="brand-badge-pill">
+                    <span class="live-status-dot"></span>
+                    <span>SmartLib v1.0 &bull; SQLite Active</span>
+                </div>
+            </div>
+
+            <div class="brand-content">
+                <div class="brand-logo-large">
+                    <i class="fa-solid fa-book-bookmark"></i>
+                </div>
+                <h2>Next-Gen Library<br><span class="gradient-text">Management System</span></h2>
+                <p class="brand-tagline">
+                    A complete, role-governed platform for seamless cataloging, instant issue/returns, automated overdue tracking, and member administration.
+                </p>
+
+                <!-- Mini Stats Highlights on Hero -->
+                <div class="hero-stats-row">
+                    <div class="hero-stat-box">
+                        <span class="h-stat-num">1,500+</span>
+                        <span class="h-stat-lbl">Books Cataloged</span>
+                    </div>
+                    <div class="hero-stat-box">
+                        <span class="h-stat-num">100%</span>
+                        <span class="h-stat-lbl">Offline SQLite</span>
+                    </div>
+                    <div class="hero-stat-box">
+                        <span class="h-stat-num">3 Roles</span>
+                        <span class="h-stat-lbl">Admin &bull; Lib &bull; Student</span>
+                    </div>
+                </div>
+
+                <!-- Feature Badges -->
+                <div class="feature-pills">
+                    <div class="pill">
+                        <div class="pill-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                        <div>
+                            <strong>Role-Based Access</strong>
+                            <span>Granular authorization for Admin, Staff & Students</span>
+                        </div>
+                    </div>
+                    <div class="pill">
+                        <div class="pill-icon"><i class="fa-solid fa-bolt"></i></div>
+                        <div>
+                            <strong>Instant Circulation</strong>
+                            <span>One-click issue, renew (+14 days), and return</span>
+                        </div>
+                    </div>
+                    <div class="pill">
+                        <div class="pill-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                        <div>
+                            <strong>Automated Fines & Due Dates</strong>
+                            <span>Real-time overdue tracking at ₹5/day</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="brand-footer">
+                <span>&copy; 2026 SmartLib System &bull; Node.js + Express + SQLite</span>
+                <span class="brand-secure-badge"><i class="fa-solid fa-lock"></i> 256-bit Token Auth</span>
+            </div>
+        </div>
+
+        <!-- Right Login Card Panel -->
+        <div class="form-side">
+            <div class="login-card">
+                <!-- Mobile Branding (Visible only on smaller screens) -->
+                <div class="mobile-brand">
+                    <div class="mobile-logo-circle">
+                        <i class="fa-solid fa-book-bookmark"></i>
+                    </div>
+                    <div>
+                        <h2>SmartLib Portal</h2>
+                        <span>Library Management System</span>
+                    </div>
+                </div>
+
+                <div class="card-header">
+                    <span class="card-eyebrow">WELCOME BACK</span>
+                    <h3>Sign In to Dashboard</h3>
+                    <p>Select your account role and enter credentials to continue</p>
+                </div>
+
+                <!-- Role Selector Tabs -->
+                <div class="role-selector" id="role-selector-container">
+                    <button type="button" class="role-btn active" data-role="admin">
+                        <i class="fa-solid fa-user-shield"></i>
+                        <span>Admin</span>
+                    </button>
+                    <button type="button" class="role-btn" data-role="librarian">
+                        <i class="fa-solid fa-book-reader"></i>
+                        <span>Librarian</span>
+                    </button>
+                    <button type="button" class="role-btn" data-role="student">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <span>Student</span>
+                    </button>
+                </div>
+
+                <!-- Alert Message Notification Box -->
+                <div id="alert-box" class="alert-box hidden">
+                    <i class="fa-solid fa-circle-exclamation alert-icon"></i>
+                    <span id="alert-message">Invalid credentials entered</span>
+                </div>
+
+                <!-- Login Form -->
+                <form id="login-form" novalidate>
+                    <!-- Username or Email Field -->
+                    <div class="input-group">
+                        <label for="username">
+                            <span>Username or Email</span>
+                            <span class="req-star">*</span>
+                        </label>
+                        <div class="input-field">
+                            <i class="fa-regular fa-envelope field-icon"></i>
+                            <input 
+                                type="text" 
+                                id="username" 
+                                placeholder="Enter username (e.g. admin)" 
+                                autocomplete="username"
+                                required
+                            >
+                        </div>
+                        <span class="field-error" id="username-error"></span>
+                    </div>
+
+                    <!-- Password Field -->
+                    <div class="input-group">
+                        <div class="label-row">
+                            <label for="password">
+                                <span>Password</span>
+                                <span class="req-star">*</span>
+                            </label>
+                            <a href="#" id="forgot-password-link" class="forgot-link">
+                                <i class="fa-solid fa-key" style="font-size: 0.75rem;"></i> Forgot password?
+                            </a>
+                        </div>
+                        <div class="input-field">
+                            <i class="fa-solid fa-lock field-icon"></i>
+                            <input 
+                                type="password" 
+                                id="password" 
+                                placeholder="Enter password (e.g. admin123)" 
+                                autocomplete="current-password"
+                                required
+                            >
+                            <button type="button" id="toggle-password" class="toggle-password-btn" title="Toggle password visibility" aria-label="Toggle password visibility">
+                                <i class="fa-regular fa-eye" id="toggle-icon"></i>
+                            </button>
+                        </div>
+                        <span class="field-error" id="password-error"></span>
+                    </div>
+
+                    <!-- Options Row -->
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox" id="remember-me" checked>
+                            <span class="checkmark"></span>
+                            <span>Remember this browser session</span>
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" id="login-button" class="btn-primary btn-login-glow">
+                        <span class="btn-text">Sign In to Account</span>
+                        <i class="fa-solid fa-arrow-right btn-icon"></i>
+                        <span class="btn-spinner hidden"><i class="fa-solid fa-spinner fa-spin"></i></span>
+                    </button>
+                </form>
+
+                <!-- Demo Accounts Interactive Quick Autofill Section -->
+                <div class="demo-credentials">
+                    <div class="demo-title">
+                        <div class="demo-title-left">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            <span>Quick Demo Accounts</span>
+                        </div>
+                        <span class="demo-hint-badge">Click any card to autofill</span>
+                    </div>
+
+                    <div class="demo-cards-grid">
+                        <!-- Admin Demo Card -->
+                        <div class="demo-card-item" data-user="admin" data-pass="admin123" data-role="admin" role="button" tabindex="0">
+                            <div class="demo-card-avatar avatar-admin">
+                                <i class="fa-solid fa-user-shield"></i>
+                            </div>
+                            <div class="demo-card-info">
+                                <div class="demo-card-role">ADMINISTRATOR</div>
+                                <div class="demo-card-creds">admin &bull; admin123</div>
+                            </div>
+                            <span class="demo-click-pill">Use</span>
+                        </div>
+
+                        <!-- Librarian Demo Card -->
+                        <div class="demo-card-item" data-user="librarian" data-pass="lib123" data-role="librarian" role="button" tabindex="0">
+                            <div class="demo-card-avatar avatar-lib">
+                                <i class="fa-solid fa-book-reader"></i>
+                            </div>
+                            <div class="demo-card-info">
+                                <div class="demo-card-role">LIBRARIAN</div>
+                                <div class="demo-card-creds">librarian &bull; lib123</div>
+                            </div>
+                            <span class="demo-click-pill">Use</span>
+                        </div>
+
+                        <!-- Student Demo Card -->
+                        <div class="demo-card-item" data-user="student" data-pass="student123" data-role="student" role="button" tabindex="0">
+                            <div class="demo-card-avatar avatar-student">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                            </div>
+                            <div class="demo-card-info">
+                                <div class="demo-card-role">STUDENT</div>
+                                <div class="demo-card-creds">student &bull; student123</div>
+                            </div>
+                            <span class="demo-click-pill">Use</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgot-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-key" style="color: var(--primary-color);"></i> Password Reset Request</h3>
+                <button type="button" class="modal-close" id="close-forgot-modal" aria-label="Close dialog">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-desc">
+                    Enter your registered library username or email. The system will look up your account record.
+                </p>
+                <div class="input-group">
+                    <label for="reset-identity">Username or Registered Email</label>
+                    <div class="input-field">
+                        <i class="fa-regular fa-envelope field-icon"></i>
+                        <input type="text" id="reset-identity" placeholder="e.g. admin or student@library.edu">
+                    </div>
+                </div>
+                <div id="forgot-feedback" class="alert-box hidden" style="margin-top: 1rem;"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" id="cancel-forgot-modal">Cancel</button>
+                <button type="button" class="btn-primary" id="submit-forgot-modal" style="width: auto;">
+                    <span>Verify & Submit</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Client & Controller -->
+    <script src="js/api.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

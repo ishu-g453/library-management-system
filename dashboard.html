@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartLib - Dashboard</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="app-sidebar">
+            <div class="sidebar-brand">
+                <i class="fa-solid fa-book-bookmark"></i>
+                <h2>SmartLib</h2>
+                <span>v1.0</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section-title">Core Navigation</div>
+                <a href="dashboard.html" class="nav-link active" id="nav-dashboard">
+                    <i class="fa-solid fa-gauge-high"></i> Dashboard
+                </a>
+                <a href="books.html" class="nav-link" id="nav-books">
+                    <i class="fa-solid fa-book"></i> Book Catalog
+                </a>
+                <a href="categories.html" class="nav-link role-staff-only" id="nav-categories">
+                    <i class="fa-solid fa-tags"></i> Book Categories
+                </a>
+
+                <div class="nav-section-title role-staff-only">Circulation Desk</div>
+                <a href="issue-books.html" class="nav-link role-staff-only" id="nav-issue-books">
+                    <i class="fa-solid fa-arrow-up-from-bracket"></i> Issue Books
+                </a>
+                <a href="return-books.html" class="nav-link role-staff-only" id="nav-return-books">
+                    <i class="fa-solid fa-arrow-down-to-bracket"></i> Return Books
+                </a>
+                <a href="overdue.html" class="nav-link" id="nav-overdue">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Due Dates & Overdue
+                </a>
+
+                <div class="nav-section-title role-student-only">Student Portal</div>
+                <a href="my-books.html" class="nav-link role-student-only" id="nav-my-books">
+                    <i class="fa-solid fa-book-reader"></i> My Borrowed Books
+                </a>
+
+                <div class="nav-section-title role-staff-only">Administration</div>
+                <a href="members.html" class="nav-link role-staff-only" id="nav-members">
+                    <i class="fa-solid fa-users"></i> Manage Members
+                </a>
+                <a href="librarians.html" class="nav-link role-admin-only" id="nav-librarians">
+                    <i class="fa-solid fa-user-shield"></i> Manage Librarians
+                </a>
+                <a href="reports.html" class="nav-link role-staff-only" id="nav-reports">
+                    <i class="fa-solid fa-chart-pie"></i> Reports & Logs
+                </a>
+
+                <div class="nav-section-title">Account & Help</div>
+                <a href="notifications.html" class="nav-link" id="nav-notifications">
+                    <i class="fa-solid fa-bell"></i> Notifications
+                </a>
+                <a href="profile.html" class="nav-link" id="nav-profile">
+                    <i class="fa-solid fa-user"></i> User Profile
+                </a>
+                <a href="settings.html" class="nav-link role-admin-only" id="nav-settings">
+                    <i class="fa-solid fa-sliders"></i> System Settings
+                </a>
+                <a href="help.html" class="nav-link" id="nav-help">
+                    <i class="fa-solid fa-circle-question"></i> Help & About
+                </a>
+            </nav>
+
+            <!-- User Info & Logout -->
+            <div class="sidebar-user">
+                <div class="user-avatar display-user-avatar">A</div>
+                <div class="user-info">
+                    <span class="display-user-name">Administrator</span>
+                    <span class="display-user-role">ADMIN</span>
+                </div>
+                <button type="button" class="btn-sidebar-logout btn-logout" title="Sign Out">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Workspace -->
+        <main class="app-main">
+            <!-- Topbar Header -->
+            <header class="app-topbar">
+                <div class="topbar-left">
+                    <button type="button" id="mobile-menu-toggle" class="mobile-menu-btn">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div class="page-title">
+                        <h1>Library Dashboard</h1>
+                    </div>
+                </div>
+                <div class="topbar-right">
+                    <div class="server-status-pill">
+                        <span class="pulse-dot"></span>
+                        <span>Backend Live</span>
+                    </div>
+                    <button type="button" class="btn-secondary btn-sm btn-logout">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out
+                    </button>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <section class="app-content">
+                <!-- Welcome Banner -->
+                <div style="margin-bottom: 1.5rem; background: linear-gradient(135deg, #1e3a8a, #2563eb); color: white; padding: 1.5rem 2rem; border-radius: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                    <div>
+                        <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem;">
+                            Welcome back, <span class="display-user-name">User</span>!
+                        </h2>
+                        <p style="opacity: 0.85; font-size: 0.95rem;">
+                            Role: <strong class="display-user-role" style="color: #67e8f9; text-transform: uppercase;">ADMIN</strong> &bull; Centralized Library Management Dashboard
+                        </p>
+                    </div>
+                    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                        <a href="books.html" class="btn-secondary btn-sm" style="background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3);">
+                            <i class="fa-solid fa-magnifying-glass"></i> Search Catalog
+                        </a>
+                        <a href="issue-return.html" class="btn-primary btn-sm role-admin-librarian" style="background: #ffffff; color: #1e3a8a; border: none;">
+                            <i class="fa-solid fa-plus"></i> Issue a Book
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Metric Stats Cards -->
+                <div class="stats-grid" id="stats-grid-container">
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <span>Total Book Titles</span>
+                            <h3 id="stat-total-titles">--</h3>
+                        </div>
+                        <div class="stat-icon icon-blue">
+                            <i class="fa-solid fa-book"></i>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <span>Available Copies</span>
+                            <h3 id="stat-available-copies">--</h3>
+                        </div>
+                        <div class="stat-icon icon-emerald">
+                            <i class="fa-solid fa-check-double"></i>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <span>Currently Borrowed</span>
+                            <h3 id="stat-issued-copies">--</h3>
+                        </div>
+                        <div class="stat-icon icon-amber">
+                            <i class="fa-solid fa-hand-holding-hand"></i>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <span>Overdue Loans</span>
+                            <h3 id="stat-overdue-count">--</h3>
+                        </div>
+                        <div class="stat-icon icon-rose">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Two Column Layout: Popular Books + Recent Activity -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1.5rem;">
+                    <!-- Most Borrowed Books -->
+                    <div class="content-card">
+                        <div class="card-header-actions">
+                            <h3><i class="fa-solid fa-fire" style="color: #f59e0b;"></i> Popular Library Titles</h3>
+                            <a href="books.html" class="btn-secondary btn-sm">View All</a>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Book Title</th>
+                                        <th>Category</th>
+                                        <th>Available</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="popular-books-table-body">
+                                    <tr><td colspan="3" class="empty-state">Loading popular books...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity Logs -->
+                    <div class="content-card">
+                        <div class="card-header-actions">
+                            <h3><i class="fa-solid fa-clock-rotate-left" style="color: #3b82f6;"></i> Recent System Activity</h3>
+                            <a href="reports.html" class="btn-secondary btn-sm">Full Audit</a>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Action</th>
+                                        <th>Details</th>
+                                        <th>Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recent-activity-table-body">
+                                    <tr><td colspan="3" class="empty-state">Loading activities...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+    </div>
+
+    <!-- API Client & Controller -->
+    <script src="js/api.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
+

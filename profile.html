@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartLib - User Profile</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="app-sidebar">
+            <div class="sidebar-brand">
+                <i class="fa-solid fa-book-bookmark"></i>
+                <h2>SmartLib</h2>
+                <span>v1.0</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section-title">Core Navigation</div>
+                <a href="dashboard.html" class="nav-link" id="nav-dashboard">
+                    <i class="fa-solid fa-gauge-high"></i> Dashboard
+                </a>
+                <a href="books.html" class="nav-link" id="nav-books">
+                    <i class="fa-solid fa-book"></i> Book Catalog
+                </a>
+                <a href="categories.html" class="nav-link role-staff-only" id="nav-categories">
+                    <i class="fa-solid fa-tags"></i> Book Categories
+                </a>
+
+                <div class="nav-section-title role-staff-only">Circulation Desk</div>
+                <a href="issue-books.html" class="nav-link role-staff-only" id="nav-issue-books">
+                    <i class="fa-solid fa-arrow-up-from-bracket"></i> Issue Books
+                </a>
+                <a href="return-books.html" class="nav-link role-staff-only" id="nav-return-books">
+                    <i class="fa-solid fa-arrow-down-to-bracket"></i> Return Books
+                </a>
+                <a href="overdue.html" class="nav-link" id="nav-overdue">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Due Dates & Overdue
+                </a>
+
+                <div class="nav-section-title role-student-only">Student Portal</div>
+                <a href="my-books.html" class="nav-link role-student-only" id="nav-my-books">
+                    <i class="fa-solid fa-book-reader"></i> My Borrowed Books
+                </a>
+
+                <div class="nav-section-title role-staff-only">Administration</div>
+                <a href="members.html" class="nav-link role-staff-only" id="nav-members">
+                    <i class="fa-solid fa-users"></i> Manage Members
+                </a>
+                <a href="librarians.html" class="nav-link role-admin-only" id="nav-librarians">
+                    <i class="fa-solid fa-user-shield"></i> Manage Librarians
+                </a>
+                <a href="reports.html" class="nav-link role-staff-only" id="nav-reports">
+                    <i class="fa-solid fa-chart-pie"></i> Reports & Logs
+                </a>
+
+                <div class="nav-section-title">Account & Help</div>
+                <a href="notifications.html" class="nav-link" id="nav-notifications">
+                    <i class="fa-solid fa-bell"></i> Notifications
+                </a>
+                <a href="profile.html" class="nav-link active" id="nav-profile">
+                    <i class="fa-solid fa-user"></i> User Profile
+                </a>
+                <a href="settings.html" class="nav-link role-admin-only" id="nav-settings">
+                    <i class="fa-solid fa-sliders"></i> System Settings
+                </a>
+                <a href="help.html" class="nav-link" id="nav-help">
+                    <i class="fa-solid fa-circle-question"></i> Help & About
+                </a>
+            </nav>
+
+            <div class="sidebar-user">
+                <div class="user-avatar display-user-avatar">U</div>
+                <div class="user-info">
+                    <span class="display-user-name">User</span>
+                    <span class="display-user-role">ROLE</span>
+                </div>
+                <button type="button" class="btn-sidebar-logout btn-logout" title="Sign Out">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            <header class="app-topbar">
+                <div class="topbar-left">
+                    <button type="button" id="mobile-menu-toggle" class="mobile-menu-btn">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div class="page-title">
+                        <h1>User Profile & Credentials</h1>
+                    </div>
+                </div>
+                <div class="topbar-right">
+                    <button type="button" class="btn-secondary btn-sm btn-logout">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out
+                    </button>
+                </div>
+            </header>
+
+            <section class="app-content">
+                <div style="display: grid; grid-template-columns: 1fr 1.3fr; gap: 2rem;">
+                    <!-- Left: Profile Summary Card -->
+                    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                        <div class="content-card" style="margin-bottom: 0; text-align: center; padding: 2rem 1.5rem;">
+                            <div class="user-avatar display-user-avatar" style="width: 72px; height: 72px; font-size: 2rem; margin: 0 auto 1rem auto; box-shadow: var(--shadow-md);">
+                                U
+                            </div>
+                            <h3 class="display-user-name" style="font-size: 1.35rem; font-weight: 700; margin-bottom: 0.25rem;">User</h3>
+                            <span class="badge badge-info display-user-role" style="font-size: 0.82rem; padding: 0.35rem 0.85rem; margin-bottom: 1rem; display: inline-block;">ROLE</span>
+                            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1.5rem;" id="profile-meta-joined">
+                                Member since: Loading...
+                            </p>
+
+                            <!-- Mini info table -->
+                            <div style="text-align: left; background: #f8fafc; border: 1px solid var(--border-color); border-radius: 12px; padding: 1rem; font-size: 0.88rem;">
+                                <div style="display: flex; justify-content: space-between; padding: 0.4rem 0; border-bottom: 1px dashed var(--border-color);">
+                                    <span style="color: var(--text-secondary);">Username:</span>
+                                    <strong id="profile-username">--</strong>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 0.4rem 0; border-bottom: 1px dashed var(--border-color);">
+                                    <span style="color: var(--text-secondary);">Email:</span>
+                                    <strong id="profile-email">--</strong>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 0.4rem 0;">
+                                    <span style="color: var(--text-secondary);">Phone:</span>
+                                    <strong id="profile-phone">--</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Student Member Card (if student) -->
+                        <div id="student-member-card" class="content-card hidden" style="margin-bottom: 0; background: linear-gradient(135deg, #1e3a8a, #2563eb); color: white; padding: 1.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.8;">OFFICIAL LIBRARY CARD</span>
+                                <i class="fa-solid fa-id-card" style="font-size: 1.4rem;"></i>
+                            </div>
+                            <h4 id="card-member-code" style="font-size: 1.3rem; font-family: monospace; letter-spacing: 0.05em; margin-bottom: 0.4rem;">MEM-1001</h4>
+                            <p id="card-member-name" style="font-size: 1rem; font-weight: 600; margin-bottom: 0.2rem;">Rahul Sharma</p>
+                            <small id="card-member-dept" style="opacity: 0.8; font-size: 0.85rem; display: block; margin-bottom: 1rem;">Computer Science</small>
+                            <div style="display: flex; gap: 1rem; font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 0.75rem;">
+                                <span>Active Loans: <strong id="card-active-loans">0</strong></span>
+                                <span>Pending Fines: <strong id="card-fines">₹0</strong></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Edit Details & Change Password Forms -->
+                    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                        <!-- Personal Details Form -->
+                        <div class="content-card" style="margin-bottom: 0;">
+                            <div class="card-header-actions">
+                                <h3><i class="fa-solid fa-user-pen" style="color: var(--primary-color);"></i> Personal Details</h3>
+                            </div>
+                            <div style="padding: 1.5rem;">
+                                <form id="form-update-profile">
+                                    <div class="input-group">
+                                        <label for="edit-prof-name">Full Name *</label>
+                                        <div class="input-field">
+                                            <i class="fa-solid fa-user field-icon"></i>
+                                            <input type="text" id="edit-prof-name" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-grid-2">
+                                        <div class="input-group">
+                                            <label for="edit-prof-email">Email Address *</label>
+                                            <div class="input-field">
+                                                <i class="fa-solid fa-envelope field-icon"></i>
+                                                <input type="email" id="edit-prof-email" required>
+                                            </div>
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="edit-prof-phone">Phone Number</label>
+                                            <div class="input-field">
+                                                <i class="fa-solid fa-phone field-icon"></i>
+                                                <input type="tel" id="edit-prof-phone">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" id="btn-save-profile" class="btn-primary" style="width: auto;">
+                                        <i class="fa-solid fa-check"></i> Save Personal Details
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Change Password Form -->
+                        <div class="content-card" style="margin-bottom: 0;">
+                            <div class="card-header-actions">
+                                <h3><i class="fa-solid fa-lock" style="color: var(--warning-color);"></i> Security & Password</h3>
+                            </div>
+                            <div style="padding: 1.5rem;">
+                                <form id="form-change-password">
+                                    <div class="input-group">
+                                        <label for="pass-current">Current Password *</label>
+                                        <div class="input-field">
+                                            <i class="fa-solid fa-key field-icon"></i>
+                                            <input type="password" id="pass-current" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-grid-2">
+                                        <div class="input-group">
+                                            <label for="pass-new">New Password *</label>
+                                            <div class="input-field">
+                                                <i class="fa-solid fa-lock field-icon"></i>
+                                                <input type="password" id="pass-new" required minlength="5">
+                                            </div>
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="pass-confirm">Confirm New Password *</label>
+                                            <div class="input-field">
+                                                <i class="fa-solid fa-lock field-icon"></i>
+                                                <input type="password" id="pass-confirm" required minlength="5">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" id="btn-change-pass" class="btn-secondary" style="width: auto;">
+                                        <i class="fa-solid fa-shield-halved"></i> Update Password
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- API Client & Controller -->
+    <script src="js/api.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+</html>
+

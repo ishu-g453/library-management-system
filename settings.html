@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartLib - System & Library Settings</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="app-sidebar">
+            <div class="sidebar-brand">
+                <i class="fa-solid fa-book-bookmark"></i>
+                <h2>SmartLib</h2>
+                <span>v1.0</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section-title">Core Navigation</div>
+                <a href="dashboard.html" class="nav-link" id="nav-dashboard">
+                    <i class="fa-solid fa-gauge-high"></i> Dashboard
+                </a>
+                <a href="books.html" class="nav-link" id="nav-books">
+                    <i class="fa-solid fa-book"></i> Book Catalog
+                </a>
+                <a href="categories.html" class="nav-link role-staff-only" id="nav-categories">
+                    <i class="fa-solid fa-tags"></i> Book Categories
+                </a>
+
+                <div class="nav-section-title role-staff-only">Circulation Desk</div>
+                <a href="issue-books.html" class="nav-link role-staff-only" id="nav-issue-books">
+                    <i class="fa-solid fa-arrow-up-from-bracket"></i> Issue Books
+                </a>
+                <a href="return-books.html" class="nav-link role-staff-only" id="nav-return-books">
+                    <i class="fa-solid fa-arrow-down-to-bracket"></i> Return Books
+                </a>
+                <a href="overdue.html" class="nav-link" id="nav-overdue">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Due Dates & Overdue
+                </a>
+
+                <div class="nav-section-title role-student-only">Student Portal</div>
+                <a href="my-books.html" class="nav-link role-student-only" id="nav-my-books">
+                    <i class="fa-solid fa-book-reader"></i> My Borrowed Books
+                </a>
+
+                <div class="nav-section-title role-staff-only">Administration</div>
+                <a href="members.html" class="nav-link role-staff-only" id="nav-members">
+                    <i class="fa-solid fa-users"></i> Manage Members
+                </a>
+                <a href="librarians.html" class="nav-link role-admin-only" id="nav-librarians">
+                    <i class="fa-solid fa-user-shield"></i> Manage Librarians
+                </a>
+                <a href="reports.html" class="nav-link role-staff-only" id="nav-reports">
+                    <i class="fa-solid fa-chart-pie"></i> Reports & Logs
+                </a>
+
+                <div class="nav-section-title">Account & Help</div>
+                <a href="notifications.html" class="nav-link" id="nav-notifications">
+                    <i class="fa-solid fa-bell"></i> Notifications
+                </a>
+                <a href="profile.html" class="nav-link" id="nav-profile">
+                    <i class="fa-solid fa-user"></i> User Profile
+                </a>
+                <a href="settings.html" class="nav-link active role-admin-only" id="nav-settings">
+                    <i class="fa-solid fa-sliders"></i> System Settings
+                </a>
+                <a href="help.html" class="nav-link" id="nav-help">
+                    <i class="fa-solid fa-circle-question"></i> Help & About
+                </a>
+            </nav>
+
+            <div class="sidebar-user">
+                <div class="user-avatar display-user-avatar">A</div>
+                <div class="user-info">
+                    <span class="display-user-name">Administrator</span>
+                    <span class="display-user-role">ADMIN</span>
+                </div>
+                <button type="button" class="btn-sidebar-logout btn-logout" title="Sign Out">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            <header class="app-topbar">
+                <div class="topbar-left">
+                    <button type="button" id="mobile-menu-toggle" class="mobile-menu-btn">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div class="page-title">
+                        <h1>System & Library Policy Settings</h1>
+                    </div>
+                </div>
+                <div class="topbar-right">
+                    <button type="button" id="btn-save-settings-top" class="btn-primary btn-sm" style="width: auto;">
+                        <i class="fa-solid fa-floppy-disk"></i> Save Settings
+                    </button>
+                </div>
+            </header>
+
+            <section class="app-content">
+                <div class="content-card">
+                    <div class="card-header-actions">
+                        <h3><i class="fa-solid fa-sliders" style="color: var(--primary-color);"></i> Circulation Policies & Institution Setup</h3>
+                    </div>
+
+                    <div style="padding: 1.75rem;">
+                        <form id="form-settings">
+                            <!-- Institution Setup -->
+                            <h4 style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
+                                <i class="fa-solid fa-building-columns" style="color: #2563eb;"></i> Institution Profile
+                            </h4>
+
+                            <div class="input-group">
+                                <label for="set-lib-name">Library / Institution Name</label>
+                                <div class="input-field">
+                                    <i class="fa-solid fa-landmark field-icon"></i>
+                                    <input type="text" id="set-lib-name" required>
+                                </div>
+                            </div>
+
+                            <div class="form-grid-2">
+                                <div class="input-group">
+                                    <label for="set-lib-email">Support Email Address</label>
+                                    <div class="input-field">
+                                        <i class="fa-solid fa-envelope field-icon"></i>
+                                        <input type="email" id="set-lib-email" required>
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <label for="set-lib-phone">Contact Phone Number</label>
+                                    <div class="input-field">
+                                        <i class="fa-solid fa-phone field-icon"></i>
+                                        <input type="tel" id="set-lib-phone" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Circulation & Fines Rules -->
+                            <h4 style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary); margin: 1.5rem 0 1rem 0; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
+                                <i class="fa-solid fa-scale-balanced" style="color: #f59e0b;"></i> Circulation & Fines Policy
+                            </h4>
+
+                            <div class="form-grid-2">
+                                <div class="input-group">
+                                    <label for="set-fine-rate">Daily Overdue Fine Rate (₹ INR)</label>
+                                    <div class="input-field">
+                                        <i class="fa-solid fa-indian-rupee-sign field-icon"></i>
+                                        <input type="number" id="set-fine-rate" min="0" step="0.5" required>
+                                    </div>
+                                    <small style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 4px; display: block;">
+                                        Charged automatically per calendar day overdue.
+                                    </small>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="set-issue-days">Standard Loan Duration (Days)</label>
+                                    <div class="input-field">
+                                        <i class="fa-solid fa-calendar-days field-icon"></i>
+                                        <input type="number" id="set-issue-days" min="1" max="90" required>
+                                    </div>
+                                    <small style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 4px; display: block;">
+                                        Default days allowed before return is due.
+                                    </small>
+                                </div>
+                            </div>
+
+                            <div class="form-grid-2">
+                                <div class="input-group">
+                                    <label for="set-max-books">Max Active Books Per Student</label>
+                                    <div class="input-field">
+                                        <i class="fa-solid fa-layer-group field-icon"></i>
+                                        <input type="number" id="set-max-books" min="1" max="20" required>
+                                    </div>
+                                    <small style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 4px; display: block;">
+                                        Prevents borrowing beyond this concurrent checkout limit.
+                                    </small>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="set-allow-renewals">Allow Online Student Self-Renewals</label>
+                                    <div class="input-field">
+                                        <i class="fa-solid fa-rotate field-icon"></i>
+                                        <select id="set-allow-renewals" required>
+                                            <option value="true">Enabled (Students can extend 14 days)</option>
+                                            <option value="false">Disabled (Circulation desk only)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="margin-top: 2rem;">
+                                <button type="submit" id="btn-save-settings" class="btn-primary" style="width: auto; padding: 0.85rem 2rem;">
+                                    <i class="fa-solid fa-floppy-disk"></i> Save System Configuration
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- API Client & Controller -->
+    <script src="js/api.js"></script>
+    <script src="js/settings.js"></script>
+</body>
+</html>
+
